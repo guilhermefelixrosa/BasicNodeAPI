@@ -1,11 +1,13 @@
 //Importando bibliotecas
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import cors from 'cors'
 
 const prisma = new PrismaClient(); // Instanciando o Prisma Client, que é o cliente do banco de dados
 
 const app = express(); // Instanciando express
 app.use(express.json()); // Middleware para interpretar JSON no corpo da requisição, ou seja, dizendo pro meu express que o corpo da requisição é um JSON
+app.use(cors()) // Configurar o http que acessará
 
 app.post("/usuarios", async (req, res) => {
   await prisma.user.create({
